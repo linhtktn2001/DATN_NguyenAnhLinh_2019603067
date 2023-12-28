@@ -3,10 +3,10 @@ import { getAllProducts, filterProducts } from "../api/ProductApi";
 import { NavLink } from "react-router-dom";
 import "./sidebar/sidebar.css";
 
-const brands = [
+const categories = [
   {
     display_name: "Linh Kiện Máy Tính",
-    value: "4",
+    value: "1",
     icon: "bx bx-category-alt",
   },
   {
@@ -21,7 +21,7 @@ const brands = [
   },
   {
     display_name: "LAPTOP",
-    value: "1",
+    value: "4",
     icon: "bx bx-category-alt",
   },
   {
@@ -111,7 +111,7 @@ const Product = (props) => {
         setTotal(response.data.totalPages);
       });
     } else {
-      console.log(false);
+      console.log(category);
       const data = {
         page: page,
         count: count,
@@ -120,6 +120,7 @@ const Product = (props) => {
         min: min,
         max: max,
       };
+      console.log(data);
       filterProducts(data).then((resp) => {
         setProducts(resp.data.content);
         setTotal(resp.data.totalPages);
@@ -133,6 +134,7 @@ const Product = (props) => {
   };
 
   const chooseCategoryHandler = (value) => {
+
     const index = category.indexOf(value);
     if (index > -1) {
       setCategory(category.filter((i) => i !== value));
@@ -143,7 +145,9 @@ const Product = (props) => {
   };
 
   const chooseBrandHandler = (value) => {
+
     const index = brand.indexOf(value);
+    console.log(index);
     if (index > -1) {
       setBrand(brand.filter((i) => i !== value));
     } else {
@@ -181,11 +185,11 @@ const Product = (props) => {
             <div className="col mini-card">
               <h4 className="text-danger fw-bolder">Danh Mục</h4>
               <ul className="list-group">
-                {brands.map((item, index) => (
+                {categories.map((item, index) => (
                   <div className="sidebar__item" key={index}>
                     <div
-                      className={brand.includes(item.value) ? `sidebar__item-inner active` : `sidebar__item-inner`}
-                      onClick={() => chooseBrandHandler(item.value)}
+                      className={category.includes(item.value) ? `sidebar__item-inner active` : `sidebar__item-inner`}
+                      onClick={() => chooseCategoryHandler(item.value)}
                     >
                       <i className={item.icon}></i>
                       <span>{item.display_name}</span>

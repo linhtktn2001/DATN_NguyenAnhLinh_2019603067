@@ -83,7 +83,7 @@ public class ConvertUtil {
         order.setEmail(reqOrderDto.getEmail());
         order.setTotal(reqOrderDto.getTotal());
         order.setNote(reqOrderDto.getNote());
-        order.setIsPending(reqOrderDto.getIsPending());
+        order.setPending(reqOrderDto.getIsPending());
         order.setPayment(reqOrderDto.getPayment());
         order.setCreateDate(LocalDate.now());
         order.setModifyDate(LocalDate.now());

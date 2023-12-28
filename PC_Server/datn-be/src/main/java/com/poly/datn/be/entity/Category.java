@@ -12,10 +12,6 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "categories")
-@Data
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +30,60 @@ public class Category {
     @OneToMany(mappedBy = "category")
     @JsonIgnore
     private Collection<ProductCategory> productCategories;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    public LocalDate getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(LocalDate modifyDate) {
+        this.modifyDate = modifyDate;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public Collection<ProductCategory> getProductCategories() {
+        return productCategories;
+    }
+
+    public void setProductCategories(Collection<ProductCategory> productCategories) {
+        this.productCategories = productCategories;
+    }
 }

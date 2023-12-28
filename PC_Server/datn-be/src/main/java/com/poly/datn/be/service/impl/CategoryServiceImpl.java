@@ -60,19 +60,19 @@ public class CategoryServiceImpl implements CategoryService {
         Optional<Category> optional = categoryRepo.findById(category.getId());
         if(optional.isPresent()){
             Category cate = optional.get();
-            cate.setIsActive(category.getIsActive());
+            cate.setActive(category.getActive());
             cate.setModifyDate(LocalDate.now());
             cate.setDescription(category.getDescription());
             cate.setName(category.getName());
             List<Product> products = productService.getProductByCategory(cate.getId());
-            if(!category.getIsActive()){
+            if(!category.getActive()){
                 for(Product p: products){
-                    p.setIsActive(AppConst.CONST_IN_ACTIVE);
+                    p.setActive(AppConst.CONST_IN_ACTIVE);
                     productService.update(p);
                 }
             }else{
                 for(Product p: products){
-                    p.setIsActive(AppConst.CONST_ACTIVE);
+                    p.setActive(AppConst.CONST_ACTIVE);
                     productService.update(p);
                 }
             }
@@ -88,7 +88,7 @@ public class CategoryServiceImpl implements CategoryService {
         try {
             Optional<Category> optionalCategory = categoryRepo.findById(categoryDto.getId());
             Category category = optionalCategory.get();
-            category.setIsActive(false);
+            category.setActive(false);
             return categoryRepo.save(category);
         } catch (Exception e) {
             throw new AppException(CategoryConst.FALSE);

@@ -164,7 +164,7 @@ public class OrderServiceImpl implements OrderService {
             }
         }
         if (statusId == OrderStatusConst.ORDER_STATUS_SUCCESS) {
-            order.setIsPending(true);
+            order.setPending(true);
             attributeService.cacheAttribute(orderId);
         }
         order.setOrderStatus(orderStatus);
@@ -179,7 +179,7 @@ public class OrderServiceImpl implements OrderService {
             throw new AppException(OrderConst.ORDER_MSG_ERROR_NOT_EXIST);
         }
         Order order = optionalOrder.get();
-        order.setIsPending(reqUpdateOrderDto.getIsPending());
+        order.setPending(reqUpdateOrderDto.getIsPending());
         order.setAddress(reqUpdateOrderDto.getAddress());
         order.setEmail(reqUpdateOrderDto.getEmail());
         order.setFullname(reqUpdateOrderDto.getFullname());
@@ -371,7 +371,7 @@ public class OrderServiceImpl implements OrderService {
             OrderStatus orderStatus = orderStatusService.getById(OrderStatusConst.ORDER_STATUS_SUCCESS);
             order.setOrderStatus(orderStatus);
             order.setModifyDate(LocalDate.now());
-            order.setIsPending(true);
+            order.setPending(true);
             List<OrderDetail> list = orderDetailService.getAllByOrderId(order.getId());
             for (OrderDetail o : list) {
                 Attribute attribute = o.getAttribute();

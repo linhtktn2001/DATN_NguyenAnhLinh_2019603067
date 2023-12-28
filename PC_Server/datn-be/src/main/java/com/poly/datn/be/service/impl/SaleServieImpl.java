@@ -46,7 +46,7 @@ public class SaleServieImpl implements SaleService {
         Optional<Sale> optionalSale = saleRepo.findById(sale.getId());
         Sale s = saleRepo.findById(1L).get();
         if (optionalSale.isPresent()) {
-            if(sale.getId().equals(1L) && !sale.getIsActive()){
+            if(sale.getId().equals(1L) && !sale.getActive()){
                 throw new AppException(SaleConst.MSG_ERROR_SALE_NOT_ACCEPT);
             }
             Sale sl = optionalSale.get();
@@ -55,10 +55,10 @@ public class SaleServieImpl implements SaleService {
             sl.setCreateDate(sl.getCreateDate());
             sl.setModifyDate(LocalDate.now());
             sl.setDiscount(sale.getDiscount());
-            sl.setIsActive(sale.getIsActive());
+            sl.setActive(sale.getActive());
             sl = saleRepo.save(sl);
             List<Product> products = productService.getProductBySale(sl.getId());
-            if(!sl.getIsActive()){
+            if(!sl.getActive()){
                 for(Product p: products){
                     p.setSale(s);
                     productService.update(p);
@@ -76,7 +76,7 @@ public class SaleServieImpl implements SaleService {
             throw new AppException(SaleConst.MSG_ERROR_SALE_NOT_EXIST);
         }
         Sale sale = saleRepo.findById(id).orElse(null);
-        sale.setIsActive(false);
+        sale.setActive(false);
         saleRepo.save(sale);
 
     }

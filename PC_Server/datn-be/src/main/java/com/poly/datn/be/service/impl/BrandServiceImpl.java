@@ -72,20 +72,20 @@ public class BrandServiceImpl implements BrandService {
             b.setModifyDate(LocalDate.now());
             b.setDescription(brand.getDescription());
             b.setImage(brand.getImage());
-            b.setIsActive(brand.getIsActive());
+            b.setActive(brand.getActive());
             brandRepo.save(b);
             List<Product> list = productService.getProductByBrand(b.getId());
             for (Product product : list) {
                 System.out.println(product.getId());
             }
-            if (!brand.getIsActive()) {
+            if (!brand.getActive()) {
                 for (Product p : list) {
-                    p.setIsActive(AppConst.CONST_IN_ACTIVE);
+                    p.setActive(AppConst.CONST_IN_ACTIVE);
                     productService.update(p);
                 }
-            } else if (brand.getIsActive()) {
+            } else if (brand.getActive()) {
                 for (Product p : list) {
-                    p.setIsActive(AppConst.CONST_ACTIVE);
+                    p.setActive(AppConst.CONST_ACTIVE);
                     productService.update(p);
                 }
             }
@@ -102,7 +102,7 @@ public class BrandServiceImpl implements BrandService {
             throw new AppException(BrandConst.MSG_ERROR_BRAND_NOT_EXIST);
         }
         Brand b = brandRepo.findById(id).orElse(null);
-        b.setIsActive(false);
+        b.setActive(false);
         brandRepo.save(b);
 
     }

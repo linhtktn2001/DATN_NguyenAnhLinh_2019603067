@@ -130,7 +130,7 @@ public class ProductServiceImpl implements ProductService {
         product.setCreateDate(LocalDate.now());
         product.setModifyDate(LocalDate.now());
         product.setView(1L);
-        product.setIsActive(AppConst.CONST_ACTIVE);
+        product.setActive(AppConst.CONST_ACTIVE);
         product.setBrand(brand);
         product.setSale(sale);
         /*Save product to DB*/
@@ -156,7 +156,7 @@ public class ProductServiceImpl implements ProductService {
             image.setImageLink(imageUrl[i]);
             image.setCreateDate(LocalDate.now());
             image.setModifyDate(LocalDate.now());
-            image.setIsActive(AppConst.CONST_ACTIVE);
+            image.setActive(AppConst.CONST_ACTIVE);
             image.setProduct(product);
 
             imageService.createImage(image);
@@ -210,7 +210,7 @@ public class ProductServiceImpl implements ProductService {
         }
         ReqAttributeDto[] reqAttributeDtos = reqUpdateProductDto.getAttribute();
         for (ReqAttributeDto r : reqAttributeDtos) {
-            Attribute attribute = attributeService.getByProductIdAndSize(reqUpdateProductDto.getId(), r.getSize());
+            Attribute attribute = attributeService.getByProductId(reqUpdateProductDto.getId());
             if (attribute != null) {
                 attribute.setStock(r.getStock());
                 attribute.setSize(r.getSize());
@@ -254,10 +254,10 @@ public class ProductServiceImpl implements ProductService {
             if (!updateProductOptional.isPresent())
                 throw new Exception("Product is not exist");
             Product updateProduct = updateProductOptional.get();
-            if (updateProduct.getIsActive()) {
-                updateProduct.setIsActive(false);
+            if (updateProduct.getActive()) {
+                updateProduct.setActive(false);
             } else {
-                updateProduct.setIsActive(true);
+                updateProduct.setActive(true);
             }
             return productRepo.save(updateProduct);
         } catch (Exception exception) {

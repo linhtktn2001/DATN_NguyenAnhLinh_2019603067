@@ -74,6 +74,11 @@ public class AttributeServiceImpl implements AttributeService {
     }
 
     @Override
+    public Attribute getByProductId(Long productId) {
+        return attributeRepo.findByProduct_Id(productId);
+    }
+
+    @Override
     public Boolean isValidCart(Long id, Integer quantity) {
         Attribute attribute = findById(id);
         if(quantity > attribute.getStock()){

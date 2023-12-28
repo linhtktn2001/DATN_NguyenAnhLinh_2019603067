@@ -11,10 +11,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "images")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,4 +30,60 @@ public class Image {
     @JoinColumn(name = "product_id")
     @JsonIgnore
     private Product product;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImageLink() {
+        return imageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.imageLink = imageLink;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
+    }
+
+    public LocalDate getModifyDate() {
+        return modifyDate;
+    }
+
+    public void setModifyDate(LocalDate modifyDate) {
+        this.modifyDate = modifyDate;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }

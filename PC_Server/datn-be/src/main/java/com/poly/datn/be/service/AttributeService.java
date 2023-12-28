@@ -13,5 +13,6 @@ public interface AttributeService {
     List<Attribute> backAttribute(Long id);
     Attribute save(Attribute attribute);
     Attribute getByProductIdAndSize(Long productId, Integer size);
+    Attribute getByProductId(Long productId);
     Boolean isValidCart(Long id, Integer quantity);
 }
